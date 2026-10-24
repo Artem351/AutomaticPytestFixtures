@@ -1,0 +1,27 @@
+# Пример конфига. Формат не утверждён.
+dut:
+  type: mock
+
+stages:
+  - layer: hardware
+    type: mock_power
+    params:
+      timeout: 5
+      count: 2
+  - layer: linux
+    type: mock_linux
+    params:
+      file_name: image.qcow2
+  - layer: linux
+    type: mock_service
+    params:
+      name: web
+
+tests:
+  - examples/tests/test_basic.py::test_first
+  - examples/tests/test_basic.py::test_second
+
+timeouts:
+  command: 30
+  step: 300
+  cleanup: 60
