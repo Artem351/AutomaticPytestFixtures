@@ -1,0 +1,22 @@
+dut:
+  type: mock
+
+stages:
+  - layer: hardware
+    type: mock_power
+    params:
+      initial_on: true
+  - layer: hardware
+    type: mock_aux_power
+    params:
+      initial_on: false
+
+bindings:
+  power: mock_power
+
+test_bindings:
+  examples/tests/test_bindings.py::test_power_state[aux]:
+    power: mock_aux_power
+
+tests:
+  - examples/tests/test_bindings.py::test_power_state

@@ -1,0 +1,31 @@
+dut:
+  type: mock
+
+stages:
+  - layer: hardware
+    type: mock_power
+    params:
+      initial_on: true
+  - layer: linux
+    type: mock_linux
+    params:
+      file_name: image.qcow2
+  - layer: linux
+    type: mock_service
+    params:
+      name: web
+      initial_running: true
+
+bindings:
+  power: mock_power
+  system: mock_linux
+  service: mock_service
+
+tests:
+  - examples/tests/test_basic.py::test_can_change_state
+  - examples/tests/test_basic.py::test_initial_state_is_restored
+
+timeouts:
+  command: 30
+  step: 300
+  cleanup: 60
