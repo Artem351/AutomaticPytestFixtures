@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pytest-stands"
+version = "0.1.0"
+description = "pytest-фреймворк: подготовка стенда (hardware, Linux) по YAML-конфигу и запуск группы тестов"
+requires-python = ">=3.10"
+dependencies = ["pytest>=8", "pydantic>=2", "pyyaml>=6"]
+
+[project.entry-points.pytest11]
+pytest_stands = "pytest_stands.plugin"
+
+# Точка расширения: сторонние пакеты регистрируют свои этапы здесь
+# [project.entry-points."pytest_stands.stages"]
+# my_stage = "my_package.stages:MyStage"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
